@@ -26,6 +26,12 @@ public class ShopItemController {
 //                : ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Items found", shopItemList));
     }
 
+    @GetMapping("/search")
+    ResponseEntity<ResponseObject> searchItems(@RequestParam(name = "search")String search){
+        List<ShopItem> shopItemList = shopItemRepo.searchItem(search);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Query successfully", shopItemList));
+    }
+
     @GetMapping("/{id}")
     ResponseEntity<ResponseObject> findById(@PathVariable("id") Long id) {
         Optional<ShopItem> shopItem = shopItemRepo.findById(id);

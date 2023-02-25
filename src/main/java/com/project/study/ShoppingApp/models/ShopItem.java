@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+
 @Entity
 @Table
 public class ShopItem {
@@ -18,6 +20,7 @@ public class ShopItem {
     private String description;
     private String imgUrl;
     private Double price;
+    private ArrayList<Long> likedBy;
 
     public ShopItem() {
     }
@@ -36,8 +39,6 @@ public class ShopItem {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-
 
     public Long getId() {
         return id;
@@ -71,5 +72,11 @@ public class ShopItem {
         this.imgUrl = imgUrl;
     }
 
+    public ArrayList<Long> getLikedBy() {
+        return likedBy;
+    }
 
+    public void setLikedBy(ArrayList<Long> likedBy) {
+        this.likedBy = likedBy;
+    }
 }
