@@ -27,8 +27,8 @@ public class ShopItemController {
     }
 
     @GetMapping("/search")
-    ResponseEntity<ResponseObject> searchItems(@RequestParam(name = "search")String search){
-        List<ShopItem> shopItemList = shopItemRepo.searchItem(search);
+    ResponseEntity<ResponseObject> searchItems(@RequestParam(name = "name")Optional< String> name){
+        List<ShopItem> shopItemList = shopItemRepo.searchItem(name.orElse(""));
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Query successfully", shopItemList));
     }
 
