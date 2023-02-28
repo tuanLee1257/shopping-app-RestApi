@@ -21,9 +21,6 @@ public class ShopItemController {
     ResponseEntity<ResponseObject> findAllShopItems() {
         List<ShopItem> shopItemList = shopItemRepo.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Query successfully", shopItemList));
-//        return shopItemList.isEmpty() ?
-//                ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseObject("ok","Shop item empty" , shopItemList))
-//                : ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Items found", shopItemList));
     }
 
     @GetMapping("/search")
