@@ -3,23 +3,32 @@ package com.project.study.ShoppingApp.controllers;
 import com.project.study.ShoppingApp.config.JwtTokenProvider;
 import com.project.study.ShoppingApp.models.AuthenticationRequest;
 import com.project.study.ShoppingApp.models.AuthenticationResponse;
+import com.project.study.ShoppingApp.models.ResponseObject;
 import com.project.study.ShoppingApp.models.user.CustomUserDetails;
+import com.project.study.ShoppingApp.models.user.Role;
+import com.project.study.ShoppingApp.models.user.User;
+import com.project.study.ShoppingApp.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthenticationController {
     @Autowired
-    AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtTokenProvider tokenProvider;
@@ -27,7 +36,6 @@ public class AuthenticationController {
     @PostMapping("/login")
     public AuthenticationResponse authenticateUser(@RequestBody AuthenticationRequest loginRequest) {
 
-        // Xác thực thông tin người dùng Request lên
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -40,10 +48,27 @@ public class AuthenticationController {
         return new AuthenticationResponse(jwt);
     }
 
-//    @PostMapping("/register")
-//    public AuthenticationResponse register(@RequestBody AuthenticationRequest registerRequest){
-//
-//        return new AuthenticationResponse(jwt);
-//    }
+    @PostMapping("/register")
+    public AuthenticationResponse registerUser(@RequestBody AuthenticationRequest registerRequest) {
+        User registerUser  = new User();;
+        registerUser.setUsername(registerRequest.getUsername());
+        registerUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        registerUser.setRole(Role.USER);
+        userRepository.save(registerUser);
+        String jwt = tokenProvider.generateToken(new CustomUserDetails(registerUser));
+        return new AuthenticationResponse(jwt);
+    }
 
+    @PutMapping("/updateUser/{username}")
+    public ResponseEntity<String> updateUser(@PathVariable("username")String username,@RequestBody User newUser) {
+        User user = userRepository.findByUsername(username);
+        if (user!= null){
+            user.setDisplayName(newUser.getDisplayName());
+            user.setAvatar(newUser.getAvatar());
+            user.setRole(newUser.getRole());
+            userRepository.save(user);
+        return ResponseEntity.ok().body("Update successfull");
+        }
+        return ResponseEntity.badRequest().body("Update fail");
+    }
 }

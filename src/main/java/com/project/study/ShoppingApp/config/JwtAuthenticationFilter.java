@@ -1,6 +1,6 @@
 package com.project.study.ShoppingApp.config;
 
-import com.project.study.ShoppingApp.models.user.UserService;
+import com.project.study.ShoppingApp.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
