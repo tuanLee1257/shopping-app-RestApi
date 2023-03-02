@@ -1,22 +1,19 @@
 package com.project.study.ShoppingApp.controllers;
 
 import com.project.study.ShoppingApp.config.JwtTokenProvider;
-import com.project.study.ShoppingApp.models.AuthenticationRequest;
-import com.project.study.ShoppingApp.models.AuthenticationResponse;
-import com.project.study.ShoppingApp.models.ResponseObject;
+import com.project.study.ShoppingApp.models.auth.AuthenticationRequest;
+import com.project.study.ShoppingApp.models.auth.AuthenticationResponse;
 import com.project.study.ShoppingApp.models.user.CustomUserDetails;
 import com.project.study.ShoppingApp.models.user.Role;
 import com.project.study.ShoppingApp.models.user.User;
 import com.project.study.ShoppingApp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 

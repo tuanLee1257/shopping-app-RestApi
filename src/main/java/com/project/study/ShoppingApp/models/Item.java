@@ -1,15 +1,14 @@
 package com.project.study.ShoppingApp.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
-public class ShopItem {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +21,13 @@ public class ShopItem {
     private Double price;
     private ArrayList<Long> likedBy;
 
-    public ShopItem() {
+    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    List<CartDetail> cartDetailSet;
+
+    public Item() {
     }
 
-    public ShopItem(String itemName, String description, String imgUrl, Double price) {
+    public Item(String itemName, String description, String imgUrl, Double price) {
         this.itemName = itemName;
         this.description = description;
         this.imgUrl = imgUrl;

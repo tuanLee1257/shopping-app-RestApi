@@ -1,4 +1,4 @@
-package com.project.study.ShoppingApp.models;
+package com.project.study.ShoppingApp.models.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RegisterRequest {
     private String username;
     private String password;
 }

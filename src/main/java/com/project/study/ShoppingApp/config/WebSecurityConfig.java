@@ -58,6 +58,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/shop/**").hasAnyAuthority("USER")
+                .requestMatchers("/user/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();

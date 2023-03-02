@@ -1,4 +1,4 @@
-package com.project.study.ShoppingApp.models;
+package com.project.study.ShoppingApp.models.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
