@@ -33,13 +33,13 @@ public class CartDetail {
 
 }
 
-@Embeddable
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-class CartDetailKey implements Serializable {
-    @Column(name = "cart_id")
-    Long cart_id;
-    @Column(name = "item_id")
-    Long item_id;
-}
+//@Embeddable
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Data
+//class CartDetailKey implements Serializable {
+//    @Column(name = "cart_id")
+//    Long cart_id;
+//    @Column(name = "item_id")
+//    Long item_id;
+//}

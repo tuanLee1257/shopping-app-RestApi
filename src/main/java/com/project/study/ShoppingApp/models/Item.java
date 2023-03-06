@@ -1,5 +1,6 @@
 package com.project.study.ShoppingApp.models;
 
+import com.project.study.ShoppingApp.models.user.User;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,10 +20,12 @@ public class Item {
     private String description;
     private String imgUrl;
     private Double price;
-    private ArrayList<Long> likedBy;
 
     @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
     List<CartDetail> cartDetailSet;
+
+    @ManyToMany(mappedBy = "likedItems",fetch = FetchType.LAZY)
+    private List<User> users = new ArrayList<>();
 
     public Item() {
     }
@@ -72,13 +75,5 @@ public class Item {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public ArrayList<Long> getLikedBy() {
-        return likedBy;
-    }
-
-    public void setLikedBy(ArrayList<Long> likedBy) {
-        this.likedBy = likedBy;
     }
 }

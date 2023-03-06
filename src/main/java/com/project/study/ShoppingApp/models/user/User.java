@@ -1,6 +1,11 @@
 package com.project.study.ShoppingApp.models.user;
+
+import com.project.study.ShoppingApp.models.Item;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -20,4 +25,10 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_liked_item",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
+    private List<Item> likedItems = new ArrayList<>();
 }
