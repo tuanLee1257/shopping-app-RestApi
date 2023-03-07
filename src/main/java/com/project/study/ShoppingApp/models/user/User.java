@@ -1,5 +1,6 @@
 package com.project.study.ShoppingApp.models.user;
 
+import com.project.study.ShoppingApp.models.Comments;
 import com.project.study.ShoppingApp.models.Item;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -31,4 +32,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
     private List<Item> likedItems = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "userComment",cascade = CascadeType.PERSIST)
+//    private List<Comments> commentsList;
+
 }
