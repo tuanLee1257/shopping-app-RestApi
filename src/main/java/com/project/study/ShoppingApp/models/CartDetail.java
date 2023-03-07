@@ -30,7 +30,6 @@ public class CartDetail {
     private Double price;
     private Integer quantity;
 
-
 }
 
 //@Embeddable

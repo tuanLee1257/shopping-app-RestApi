@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item,Long> {
     List<Item> findByItemName(String name);
-    @Query(value = "select * from shop_item where shop_item.item_name like %:name%"
+    @Query(value = "select * from item where item.item_name like %:name%"
             ,nativeQuery = true)
     List<Item> searchItem(@Param("name")String name);
     List<Item> findByUsers(User user);

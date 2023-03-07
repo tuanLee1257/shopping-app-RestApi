@@ -1,6 +1,5 @@
 package com.project.study.ShoppingApp.models.user;
 
-import com.project.study.ShoppingApp.models.Comments;
 import com.project.study.ShoppingApp.models.Item;
 import jakarta.persistence.*;
 import lombok.Data;

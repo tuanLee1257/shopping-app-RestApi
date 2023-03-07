@@ -27,9 +27,6 @@ public class Item {
     @ManyToMany(mappedBy = "likedItems",fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "itemComment",cascade = CascadeType.ALL)
-    private List<Comments> commentsList;
-
     public Item() {
     }
 
